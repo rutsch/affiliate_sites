@@ -1,0 +1,64 @@
+extends layout
+
+block content
+	div(class='row')
+		div(class='four columns')
+			h1= subtitle.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+		div(class='eight columns ')
+
+	div(class='row')
+		div(class='two columns')
+			h4 Merken
+			hr
+			dl(id='brands', class='filter-component')
+				- for (var i=0;i<brands.length;i++) {
+					dd
+						a(class='left_menu_item filter hidden', href='#', data-filter=brands[i]._id.normalized)= brands[i]._id.title.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+						span(class='')= ' (' + brands[i].count +')'
+				- }
+			div(class='row panel')
+				h4 Laatste update
+				hr
+				p Vandaag
+		div(class='eight columns')
+			- title = title.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();});
+			h4 Alle gefilterde producten
+			hr
+			div(class='row')
+				div(class='twelve columns', id='products')
+			
+			h4 Nieuws
+			hr
+			div(class='row')
+				div(class='twelve columns')
+					- for (var i=0;feeds.length > 5 ? 5 : feeds.length;i++) {
+						div(class='panel')
+							div(class='row')
+								div(class='nine columns')
+									h5= feeds.items[i].title
+									p!= feeds.items[i].summary
+								div(class='three columns')
+									a(href=feeds.items[i].url, target='_blank') Lees meer
+					- }		
+								
+		div(class='two columns right_column')
+			h4 Categorieën
+			hr
+			dl(id='categories', class='filter-component')
+				- for (var i=0;i<categories.length;i++) {
+					dd
+						- if(categories[i]._id.title !== '' && categories[i]._id.title.length > 1) {
+							a(class='left_menu_item filter hidden', href='#', data-filter=categories[i]._id.normalized)= categories[i]._id.title.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+							span(class='')= ' (' + categories[i].count +')'
+						- }	
+				- }				
+			h4 Kleur
+			hr
+			dl(id='colors', class='filter-component')
+				- for (var i=0;i<colors.length;i++) {
+					dd
+						- if(colors[i]._id.title !== '' && colors[i]._id.title.length > 1) {
+							a(class='left_menu_item filter hidden', href='#', data-filter=colors[i]._id.normalized)= colors[i]._id.title.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+							span(class='')= ' (' + colors[i].count +')'
+						- }	
+				- }		

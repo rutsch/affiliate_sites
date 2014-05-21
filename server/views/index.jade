@@ -1,0 +1,70 @@
+extends layout
+
+block content
+	div(class='row')
+		div(class='four columns maincontent')
+			h1= subtitle
+			!= introtext
+		div(class='eight columns apn')
+			div(id='slider', class='panel')				
+				- for (var i=0;i<sliderproducts.length;i++) {
+					div(class='wrapper')
+						img(src=sliderproducts[i].data.image.large || sliderproducts[i].data.image.regular)
+						div(class='slider_details')
+							h4(class='float_right')= sliderproducts[i].data.vendor.title
+							hr
+							p Nu bij #{sliderproducts[i].affiliate} voor: € #{sliderproducts[i].data.price}
+				- }
+				
+	div(class='row')
+		div(class='two columns')
+			h4 Merken
+			hr
+			dl
+				- for (var i=0;i<brands.length;i++) {
+					dd
+						a(class='left_menu_item', href='/'+brands[i]._id.normalized)= brands[i]._id.title.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+						span(class='')= ' (' + brands[i].count +')'
+				- }
+				dd ----------------------------------------
+				dd 
+					a(class='left_menu_item') Alle categoriën				
+			div(class='row panel')
+				h4 Specials
+				hr
+				p=products
+		div(class='eight columns')
+			h4 Populair
+			hr
+			div(class='row')
+				div(class='twelve columns', id='products')
+			h4 Nieuws
+			hr
+			div(class='row')
+				div(class='twelve columns')
+					- for (var i=0;feeds.length > 5 ? 5 : feeds.length;i++) {
+						div(class='panel')
+							div(class='row')
+								div(class='nine columns')
+									h5= feeds.items[i].title
+									p!= feeds.items[i].summary
+								div(class='three columns')
+									a(href=feeds.items[i].url, target='_blank') Lees meer
+					- }					
+		div(class='two columns right_column')
+			h4 Categorieën
+			hr
+			dl
+				- for (var i=0;i<categories.length;i++) {
+					dd
+						- if(categories[i]._id.title !== '' && categories[i]._id.title.length > 1) {
+							a(class='left_menu_item', href='/'+categories[i]._id.normalized)= categories[i]._id.title.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+							span(class='')= ' (' + categories[i].count +')'
+						- }	
+				- }	
+				dd ----------------------------------------	
+				dd 
+					a(class='left_menu_item') Alle categoriën
+			h4 Laatste comments
+			hr
+

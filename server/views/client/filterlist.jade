@@ -1,0 +1,7 @@
+- for (var i=0;i<input.length;i++) {
+	- if(input[i]._id.title !== '' && input[i]._id.title.length > 1) {
+		dd
+			a(class='left_menu_item filter', href='#', data-filter=input[i]._id.normalized)= input[i]._id.title.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+			span(class='')= ' (' + input[i].count +')'
+	- }	
+- }

@@ -1,0 +1,19 @@
+div(class='row')
+	div(class='float_left nav')
+		- for (var i=0;i<(totalproducts/16);i++) { 
+			div(class='pagination_element ' + (currentpage==i+1 ? 'selected' : ''))= (i +1)
+		- }
+ul(class='products')
+	- for (var i=0;i< (products.length > 20 ? products.length : products.length);i++) {
+		li(class='panel')
+			a(href='/product/'+products[i].normalizedtitle)
+				div(class='row')
+					div(class='twelve columns')
+						img(src=products[i].data.image.large)
+				div(class='row')
+					div(class='twelve columns')
+						h5= products[i].data.title
+						p #{products[i].affiliate}: € #{products[i].data.price}
+
+	- }
+

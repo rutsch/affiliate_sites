@@ -1,0 +1,70 @@
+extends layout
+
+block content
+	div(class='row')
+		div(class='four columns maincontent')
+			h1= subtitle.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+			p=product.data.description
+		div(class='eight columns apn')
+			div(id='slider', class='panel')				
+				- for (var i=0;i<sliderproducts.length;i++) {
+					div(class='wrapper')
+						img(src=sliderproducts[i].data.image.large || sliderproducts[i].data.image.regular)
+						div(class='slider_details')
+							h4= sliderproducts[i].data.title
+							hr
+							p Nu bij 
+								a(href=sliderproducts[i].data.url, target='_blank') #{sliderproducts[i].affiliate}
+								span  voor: € #{sliderproducts[i].data.price}
+				- }
+	div(class='row')					
+		div(class='two columns')
+			h4 Merken
+			hr
+			dl
+				- for (var i=0;i<brands.length;i++) {
+					dd
+						a(class='left_menu_item', href='/'+brands[i]._id.normalized)= brands[i]._id.title.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+				- }			
+		div(class='four columns')	
+			h4 Ervaringen
+			hr
+			p(class='comment-length')=product.comments.length
+			input(type='text', id='commenttext')
+			input(type='submit', data-product=product.normalizedtitle, onclick='saveComment(this)')
+			hr
+			- for (var i=0;i<product.comments.length;i++) {
+				div(class='comment-wrapper')
+					p=product.comments[i].text
+					p=product.comments[i].created
+			- }
+		div(class='four columns')	
+			h4 Votes
+			hr
+			p(class='vote-average')=product.voteaverage
+			dl
+				dd(class='vote', data-product=product.normalizedtitle, data-vote='1') 1
+				dd(class='vote', data-product=product.normalizedtitle, data-vote='2') 2
+				dd(class='vote', data-product=product.normalizedtitle, data-vote='3') 3
+				dd(class='vote', data-product=product.normalizedtitle, data-vote='4') 4
+				dd(class='vote', data-product=product.normalizedtitle, data-vote='5') 5
+		div(class='two columns')	
+			h4 Categorieën
+			hr
+			dl(id='categories', class='filter-component')
+				- for (var i=0;i<categories.length;i++) {
+					dd
+						- if(categories[i]._id.title !== '' && categories[i]._id.title.length > 1) {
+							a(class='left_menu_item', href='/'+categories[i]._id.normalized.toLowerCase())= categories[i]._id.title.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+							span(class='')= ' (' + categories[i].count +')'
+						- }	
+				- }				
+			h4 Kleur
+			hr
+			dl(id='colors', class='filter-component')
+				- for (var i=0;i<colors.length;i++) {
+					dd
+						- if(colors[i]._id.title && colors[i]._id.title !== '' && colors[i]._id.title.length > 1) {
+							a(class='left_menu_item', href='/'+colors[i]._id.normalized.toLowerCase())= colors[i]._id.title.replace(/\w\S*/g, function(txt){return txt.charAt(0).toUpperCase() + txt.substr(1).toLowerCase();})
+						- }	
+				- }		

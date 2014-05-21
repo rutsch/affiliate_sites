@@ -1,0 +1,59 @@
+!!! 5
+//if lt IE 7
+	html(class='no-js ie6 oldie', lang='en')
+//if IE 7
+	html(class='no-js ie7 oldie', lang='en')
+//if IE 8
+	html(class='no-js ie8 oldie', lang='en')
+// [if gt IE 8] <!
+html(class='no-js', lang='en')
+	// <![endif]
+	head
+		meta(charset='utf-8')
+		meta(name="viewport", content='width=device-width')
+		title= title
+
+		link(rel='stylesheet', href='http://fonts.googleapis.com/css?family=Julius+Sans+One')
+		link(rel='stylesheet', href='/common/style/foundation.min.css')
+		link(rel='stylesheet', href='/common/style/app.css')
+
+		script(src='/common/js/modernizr.foundation.js')
+
+	body(data-template=template, data-filter=filter)
+		div(class='row')
+			div(class='four columns logo')
+				a(href='/')
+					span= title
+			div(class='eigth columns')
+				ul(class='nav-bar right')
+					li
+						a(href='/') Home
+		
+		block content
+		
+		div(class='row')
+			div(class='twelve columns panel')
+				div(class='three columns')
+					h5 Informatie
+				div(class='three columns')
+					h5 Twitter
+				div(class='three columns')
+					h5 Facebook
+				div(class='three columns')
+					h5 Over ons
+		
+		footer(class='row')
+			div(class='twelve columns')
+				div(class='row')
+					ul(class='link-list')
+						
+					
+					
+		
+		script(src='/common/js/jquery.js')
+
+		script(src='/common/js/foundation.min.js')
+		script(src='/common/js/jquery.isotope.min.js')
+		script(src='/templates.js')
+		script(src='/common/js/app.js')
+
